@@ -1,0 +1,629 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Seções gerais */
+.app, .navbar, .input-box, .tab-content, .footer {
+  background: rgba(20, 20, 20, 0.9);
+  color: #fff;
+}
+
+body {
+  background: #121212;
+  color: #e5e5e5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #0d0d0d, #111);
+  border-bottom: 2px solid #0ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar h1 {
+  font-size: 1.6rem;
+  color: #0ff;
+  text-shadow: 0 0 6px #0ff;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  color: #e5e5e5;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  background: #0ff;
+  color: #000;
+  box-shadow: 0 0 10px #0ff;
+  transform: scale(1.05);
+}
+
+/* LAYOUT */
+main {
+  flex: 1;
+  padding: 30px 40px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* SWOT CELLS */
+.matrix {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.cell {
+  padding: 15px;
+  border-radius: 12px;
+  color: #fff;
+  min-height: 150px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  background: rgba(20, 20, 20, 0.95);
+}
+
+.cell:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.cell h3 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.cell ul {
+  list-style: none;
+}
+
+.cell li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.cell li:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+}
+
+.cell li button {
+  background: transparent;
+  border: 1px solid #ff4444;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #ff4444;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cell li button:hover {
+  background: #ff4444;
+  color: #000;
+  box-shadow: 0 0 10px #ff4444;
+}
+
+/* QUADRANTE CORES MAIS NEUTRAS */
+#S { background: linear-gradient(135deg, #0f0f0f, #093); }
+#W { background: linear-gradient(135deg, #1a0a0a, #700); }
+#O { background: linear-gradient(135deg, #0a1a1a, #066); }
+#T { background: linear-gradient(135deg, #1a1a0a, #774); }
+
+/* INPUT BOX & OUTRAS SEÇÕES */
+.input-box,
+.tab-content {
+  background: rgba(20, 20, 20, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.input-box input,
+.input-box select,
+textarea,
+#sloganInput,
+#canalName,
+#canalURL,
+#canalIcon {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #111;
+  color: #0ff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.input-box input:focus,
+textarea:focus,
+#sloganInput:focus,
+#canalName:focus,
+#canalURL:focus,
+#canalIcon:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+  outline: none;
+}
+
+/* BOTÕES */
+button {
+  background: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #06f;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #0ff;
+}
+
+button.danger {
+  background: #ff4444;
+  color: #000;
+}
+
+button.danger:hover {
+  background: #c00;
+  color: #fff;
+  box-shadow: 0 0 10px #f00;
+}
+
+/* BOTÕES REMOVER */
+.cell li button,
+.canais li button,
+#logoPreview button {
+  background: transparent;
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.cell li button:hover,
+.canais li button:hover,
+#logoPreview button:hover {
+  background: #ff4444;
+  color: #000;
+  box-shadow: 0 0 8px #ff4444;
+}
+
+/* CANAIS DIGITAIS */
+.canais {
+  list-style: none;
+  padding: 0;
+}
+
+.canais li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.canais li a {
+  color: #0ff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.canais li a:hover {
+  color: #06f;
+  text-shadow: 0 0 8px #0ff;
+  transform: scale(1.02);
+}
+
+/* LOGO */
+#logoPreview img {
+  max-width: 220px;
+  border-radius: 12px;
+  margin-top: 10px;
+  display: block;
+}
+
+#logoPreview button {
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.bonitinho {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #ff4444;
+  background: transparent;
+  border: 2px solid #ff4444;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 transparent;
+}
+
+.bonitinho:hover {
+  background: #ff4444;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #ff4444;
+}
+
+
+/* lista */
+/* CÉLULAS DE TAREFAS COM CORES */
+.cell-tarefa.figma {
+background: linear-gradient(135deg, #0a0a0a, #033);
+box-shadow: 0 0 12px rgba(0, 170, 255, 0.3);
+}
+
+.cell-tarefa.documentacao {
+background: linear-gradient(135deg, #0a0a0a, #063);
+box-shadow: 0 0 12px rgba(0, 255, 170, 0.3);
+}
+
+.cell-tarefa.splash {
+background: linear-gradient(135deg, #0a0a0a, #306);
+box-shadow: 0 0 12px rgba(170, 0, 255, 0.3);
+}
+
+.cell-tarefa h3 {
+color: #0ff;
+text-shadow: 0 0 6px #0ff;
+}
+
+.cell-tarefa ul li {
+background: rgba(255, 255, 255, 0.08);
+}
+
+.cell-tarefa ul li:hover {
+background: rgba(255, 255, 255, 0.15);
+}
+
+
+
+
+/* Slogan - Lista */
+#sloganList {
+  list-style: none;
+  margin-top: 15px;
+  padding: 0;
+}
+
+#sloganList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05); /* Fundo sutil */
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s; /* Transição suave */
+}
+
+/* Hover nos itens do slogan */
+#sloganList li:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+}
+
+/* Botão Remover do Slogan */
+#sloganList li button {
+  background: transparent;
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+/* Efeito de hover no botão Remover */
+#sloganList li button:hover {
+  background: #ff4444;
+  color: #000;
+  box-shadow: 0 0 8px #ff4444;
+}
+
+/* Slogan Input - Estilo semelhante aos outros inputs */
+#sloganInput {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #111;
+  color: #0ff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+#sloganInput:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+  outline: none;
+}
+
+
+/* ADICIONAIS */
+#adicionais {
+  width: 100%;
+  padding: 30px 40px; /* corrigido: mesmo padding do main */
+}
+
+#adicionais .input-box {
+  background: rgba(20, 20, 20, 0.95);
+  padding: 20px; /* igual às outras seções */
+  border-radius: 12px;
+  color: #fff;
+  margin: 0;
+}
+
+#adicionais .input-box input,
+#adicionais .input-box textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #111;
+  color: #0ff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+#adicionais .input-box input:focus,
+#adicionais .input-box textarea:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+  outline: none;
+}
+
+#adicionaisList {
+  list-style: none;
+  margin-top: 15px;
+  padding: 0;
+}
+
+#adicionaisList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+#adicionaisList li button {
+  background: transparent;
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+#adicionaisList li button:hover {
+  background: #ff4444;
+  color: #000;
+  box-shadow: 0 0 8px #ff4444;
+}
+
+/* Observações */
+#observacoes {
+  width: 100%;
+  padding: 30px 40px; /* mesma largura e padding do main */
+}
+
+#observacoes textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #111;
+  color: #0ff;
+  font-size: 1rem;
+  transition: 0.3s;
+  min-height: 150px; /* Adiciona altura mínima para textarea */
+}
+
+#observacoes textarea:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+  outline: none;
+}
+
+#observacoes button {
+  background: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+#observacoes button:hover {
+  background: #06f;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #0ff;
+}
+
+#feedbackList {
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+}
+
+#feedbackList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+#feedbackList li button {
+  background: transparent;
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+#feedbackList li button:hover {
+  background: #ff4444;
+  color: #000;
+  box-shadow: 0 0 8px #ff4444;
+}
+
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  margin-top: 30px;
+  border-top: 1px solid #222;
+  background: #111;
+}
+
+/* MOBILE RESPONSIVO - até 768px */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 20px;
+  }
+
+  .navbar h1 {
+    font-size: 1.3rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .navbar a {
+    width: 100%;
+    display: block;
+  }
+
+  main,
+  #adicionais,
+  #observacoes {
+    padding: 20px;
+  }
+
+  .grid,
+  .matrix {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cell {
+    min-height: auto;
+  }
+
+  input,
+  select,
+  textarea,
+  #sloganInput,
+  #canalName,
+  #canalURL,
+  #canalIcon {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+
+  button,
+  .bonitinho {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+
+  #logoPreview img {
+    max-width: 100%;
+  }
+
+  footer {
+    font-size: 0.9rem;
+    padding: 16px;
+  }
+}

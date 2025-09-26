@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeto Empreendedor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="Gemini_Generated_Image_z4kk98z4kk98z4kk.png" type="image/x-icon">
+
+  <style>
+    /* TELA DE LOGIN */
+    #loginScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(to right, #000, #0ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .login-box {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff;
+      text-align: center;
+      width: 320px;
+    }
+
+    .login-box h1 {
+      color: #0ff;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 14px;
+      border-radius: 8px;
+      border: none;
+      background: #111;
+      color: #0ff;
+      font-size: 1rem;
+      box-shadow: 0 0 4px #0ff4;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      box-shadow: 0 0 8px #0ff;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #06f;
+      color: #fff;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    #loginError {
+      color: #ff4444;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    /* ESCONDER O CONTEÚDO PRINCIPAL ATÉ LOGIN */
+    .app {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TELA DE LOGIN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h1>Projeto Empreendedor</h1>
+      <input type="text" id="loginUser" placeholder="Usuário" />
+      <input type="password" id="loginPass" placeholder="Senha" />
+      <button onclick="validarLogin()">Entrar</button>
+      <p id="loginError"></p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO ORIGINAL -->
+  <div class="app">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <h1>Projeto Empreendedor</h1>
+      <ul>
+        <li><a href="#" class="tab-link active" data-tab="swot">SWOT</a></li>
+        <li><a href="#" class="tab-link" data-tab="logo">Logo</a></li>
+        <li><a href="#" class="tab-link" data-tab="docs">Documentação</a></li>
+        <li><a href="#" class="tab-link" data-tab="canais">Canais Digitais</a></li>
+        <li><a href="#" class="tab-link" data-tab="divisao-tarefas">DIV Tarefas</a></li>
+        <li><a href="#" class="tab-link" data-tab="slogan">Slogan</a></li>
+        <li><a href="#" class="tab-link" data-tab="adicionais">Registros</a></li>
+        <li><a href="#" class="tab-link" data-tab="observacoes">Feedback</a></li>
+      </ul>
+    </nav>
+
+    <!-- Conteúdo -->
+    <main>
+      <!-- SWOT -->
+      <section class="tab-content active" id="swot">
+        <header>
+          <div>
+            <h2>SWOT Matrix Builder</h2>
+            <p>Preencha Forças, Fraquezas, Oportunidades e Ameaças — exporte como imagem ou salve em JSON.</p>
+          </div>
+          <div class="actions">
+            <button id="exportPNG">Exportar PNG</button>
+            <button id="exportJSON">Salvar JSON</button>
+            <button id="clearAll" class="danger">Limpar</button>
+          </div>
+        </header>
+
+        <div class="grid">
+          <section class="input-box">
+            <h3>Adicionar item</h3>
+            <select id="quadrant">
+              <option value="S">Força (S)</option>
+              <option value="W">Fraqueza (W)</option>
+              <option value="O">Oportunidade (O)</option>
+              <option value="T">Ameaça (T)</option>
+            </select>
+            <input type="text" id="itemText" placeholder="Descreva o item" />
+            <div class="input-actions">
+              <button id="addItem">Adicionar</button>
+              <button id="clearInput">Limpar</button>
+            </div>
+          </section>
+
+          <section class="matrix" id="matrix">
+            <div class="cell" id="S">
+              <h3>Forças <span class="count">0</span></h3>
+              <ul></ul>
+            </div>
+            <div class="cell" id="O">
+              <h3>Oportunidades <span class="count">0</span></h3>
+              <ul></ul>
+            </div>
+            <div class="cell" id="W">
+              <h3>Fraquezas <span class="count">0</span></h3>
+              <ul></ul>
+            </div>
+            <div class="cell" id="T">
+              <h3>Ameaças <span class="count">0</span></h3>
+              <ul></ul>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- Logo -->
+      <section class="tab-content" id="logo">
+        <h2>Logo do Projeto</h2>
+        <input type="file" class="bonitinho" accept="image/*" id="logoUpload">
+        <div id="logoPreview"></div>
+      </section>
+
+      <!-- Documentação -->
+      <section class="tab-content" id="docs">
+        <h2>Documentação & Slides</h2>
+        <textarea placeholder="Cole aqui links da documentação ou anotações..."></textarea>
+      </section>
+
+      <!-- Canais -->
+      <section class="tab-content" id="canais">
+        <h2>Canais Digitais</h2>
+        <ul class="canais"></ul>
+      </section>
+
+      <!-- Slogan -->
+      <section class="tab-content" id="slogan">
+        <h2>Criação de Slogan</h2>
+        <input type="text" id="sloganInput" placeholder="Digite um slogan criativo..." />
+        <button id="saveSlogan">Salvar</button>
+        <ul id="sloganList"></ul>
+      </section>
+    </main>
+
+            <section class="tab-content active" id="divisao-tarefas">
+          <header>
+            <div>
+              <h2>Divisão de Tarefas</h2>
+              <p>Organize as funções do projeto de forma clara.</p>
+            </div>
+            <div class="actions">
+              <button id="limparTarefas" class="danger">Limpar Tudo</button>
+            </div>
+          </header>
+      
+          <div class="grid">
+            <!-- Caixa de entrada -->
+            <section class="input-box">
+              <h3>Adicionar Tarefa</h3>
+              <select id="categoria">
+                <option value="figma">Figma</option>
+                <option value="documentacao">Documentação</option>
+                <option value="splash">Splash Screen</option>
+              </select>
+              <input type="text" id="descricao" placeholder="Descreva a tarefa ou responsabilidade" />
+              <div class="input-actions">
+                <button id="addTarefa">Adicionar</button>
+                <button id="limparInput">Limpar</button>
+              </div>
+            </section>
+
+        <!-- Tabela de tarefas -->
+        <section class="matrix" id="tarefas">
+          <div class="cell cell-tarefa figma">
+            <h3>Figma <span class="count">0</span></h3>
+            <ul></ul>
+          </div>
+          <div class="cell cell-tarefa documentacao">
+            <h3>Documentação <span class="count">0</span></h3>
+            <ul></ul>
+          </div>
+          <div class="cell cell-tarefa splash">
+            <h3>Splash Screen <span class="count">0</span></h3>
+            <ul></ul>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Adicionais -->
+    <section class="tab-content" id="adicionais">
+      <h2>Registros de Evolução e Adições do Projeto</h2>
+      <div class="input-box">
+        <input type="text" id="adTema" placeholder="Assunto" />
+        <textarea id="adCaracteristicas" placeholder="Descrição"></textarea>
+        <button id="addAdicional">Adicionar</button>
+      </div>
+      <ul id="adicionaisList"></ul>
+    </section>
+
+    <!-- Observações do Empresário -->
+    <section class="tab-content" id="observacoes">
+      <h2>Observações do Empresário</h2>
+      <textarea id="observacaoInput" placeholder="Digite suas observações aqui..."></textarea>
+      <button id="salvarObservacao">Salvar Observação</button>
+      <h3>Feedback da Empresa</h3>
+      <ul id="feedbackList"></ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 - ProjetoEmpreendedor Dominus</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="css/java.js"></script>
+
+  <script>
+    function validarLogin() {
+      const user = document.getElementById("loginUser").value.trim();
+      const pass = document.getElementById("loginPass").value.trim();
+      const error = document.getElementById("loginError");
+
+      if (user === "" && pass === "") {
+        document.getElementById("loginScreen").style.display = "none";
+        document.querySelector(".app").style.display = "block";
+      } else {
+        error.textContent = "Usuário ou senha incorretos.";
+      }
+    }
+  </script>
+
+</body>
+</html>
